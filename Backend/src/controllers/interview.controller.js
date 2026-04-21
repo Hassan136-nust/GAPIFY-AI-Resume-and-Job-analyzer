@@ -64,6 +64,7 @@ async function getAllInterviewReportsController(req,res){
 
 
 async function generateResumePdfController(req, res) {
+    let browser;
     try {
         const { interviewId } = req.params;
         console.log("=== Resume PDF Generation Started ===");
@@ -96,17 +97,27 @@ async function generateResumePdfController(req, res) {
         console.log("Launching Puppeteer...");
 
         // Launch Puppeteer and convert HTML to PDF
-        const browser = await puppeteer.launch({
+        browser = await puppeteer.launch({
             headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+            protocolTimeout: 120000,
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--single-process',
+                '--no-zygote'
+            ]
         });
 
         const page = await browser.newPage();
+        page.setDefaultTimeout(120000);
         
         console.log("Setting page content...");
         // Set content and wait for it to load
         await page.setContent(htmlContent, {
-            waitUntil: 'networkidle0'
+            waitUntil: 'domcontentloaded'
         });
 
         console.log("Generating PDF...");
@@ -124,6 +135,7 @@ async function generateResumePdfController(req, res) {
         });
 
         await browser.close();
+        browser = null;
         console.log("PDF generated successfully, size:", pdfBuffer.length, "bytes");
 
         // Send PDF as download
@@ -137,10 +149,21 @@ async function generateResumePdfController(req, res) {
         console.error("=== Resume PDF Generation Error ===");
         console.error("Error:", err);
         console.error("Stack:", err.stack);
+        const isPuppeteerFailure = /browser|chromium|executable|sandbox|target closed/i.test(err.message || "");
         res.status(500).json({
-            message: "Failed to generate resume PDF",
+            message: isPuppeteerFailure
+                ? "PDF engine failed on server. Please retry in a minute."
+                : "Failed to generate resume PDF",
             error: err.message
         });
+    } finally {
+        if (browser) {
+            try {
+                await browser.close();
+            } catch (closeErr) {
+                console.error("Failed to close browser cleanly:", closeErr.message);
+            }
+        }
     }
 }
 
