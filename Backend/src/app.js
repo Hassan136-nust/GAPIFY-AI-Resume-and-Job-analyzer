@@ -1,13 +1,10 @@
-const express = require("express") 
-const cookieParser = require("cookie-parser")
-const app = express();
-
+const express = require("express");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-// CORS configuration for production
-// Enable preflight requests for all routes
-app.options('*', cors()); // or app.options('*', cors(corsOptions))
+const app = express();
 
+// CORS configuration (removed the problematic app.options line)
 app.use(cors({
     origin: function(origin, callback) {
         if (!origin) return callback(null, true);
@@ -34,17 +31,32 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
-app.use(express.json());
-app.use(cookieParser())
-const  authRouter = require ("./routes/auth.routes")
-const interviewRouter = require("./routes/interview.routes")
 
-app.use("/api/auth", authRouter)
-app.use("/api/interview",interviewRouter)
+// Other middleware
+app.use(express.json());
+app.use(cookieParser());
+
+// Routes
+const authRouter = require("./routes/auth.routes");
+const interviewRouter = require("./routes/interview.routes");
+
+app.use("/api/auth", authRouter);
+app.use("/api/interview", interviewRouter);
 
 // Health check endpoint
 app.get("/", (req, res) => {
     res.json({ message: "ResumeAI API is running" });
+});
+
+// 404 handler for routes that don't exist
+app.use((req, res) => {
+    res.status(404).json({ error: "Route not found" });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error("Error:", err.message);
+    res.status(500).json({ error: "Internal server error" });
 });
 
 module.exports = app;
