@@ -1,6 +1,6 @@
 .navbar {
-    background-color: #242424;
-    border-bottom: 1px solid #333;
+    background-color: #E8DECF;
+    border-bottom: 1px solid #B99972;
     padding: 0;
     position: sticky;
     top: 0;
@@ -18,7 +18,7 @@
 
     .navbar-brand {
         h2 {
-            color: #d4376e;
+            color: #8C6642;
             font-size: 1.5rem;
             font-weight: 700;
             margin: 0;
@@ -36,15 +36,15 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background-color: #1a1a1a;
+            background-color: #F0EAE0;
             border-radius: 0.5rem;
-            border: 1px solid #333;
-            color: #e0e0e0;
+            border: 1px solid #B99972;
+            color: #342a1f;
             font-size: 0.95rem;
 
             svg {
                 font-size: 1.1rem;
-                color: #d4376e;
+                color: #8C6642;
             }
         }
 
@@ -53,8 +53,8 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, #d4376e 0%, #b82f5c 100%);
-            color: white;
+            background: linear-gradient(135deg, #8C6642 0%, #A47A4E 60%, #B99972 100%);
+            color: #faf8f4;
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
@@ -68,7 +68,7 @@
 
             &:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(212, 55, 110, 0.4);
+                box-shadow: 0 4px 12px rgba(140, 102, 66, 0.35);
             }
         }
     }

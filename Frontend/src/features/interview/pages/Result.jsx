@@ -5,6 +5,7 @@ import { FiCheckCircle, FiAlertCircle, FiMap, FiChevronDown, FiChevronUp, FiDown
 import { InterviewContext } from "../interview.context"
 import { useNavigate } from "react-router"
 import Navbar from "../../../components/Navbar"
+import DeveloperButton from "../../../components/DeveloperButton"
 import { API_ENDPOINTS } from "../../../config/api"
 
 const Result = () => {
@@ -23,6 +24,7 @@ const Result = () => {
         return (
             <>
                 <Navbar />
+                <DeveloperButton />
                 <div className="result-page">
                     <div className="result-container">
                         <div className="loading-state">
@@ -124,7 +126,7 @@ const Result = () => {
                                     </div>
                                 ))
                             ) : (
-                                <p style={{color: '#999'}}>No technical questions available</p>
+                                <p style={{color: '#6a5b48'}}>No technical questions available</p>
                             )}
                         </div>
                     </div>
@@ -161,7 +163,7 @@ const Result = () => {
                                     </div>
                                 ))
                             ) : (
-                                <p style={{color: '#999'}}>No behavioral questions available</p>
+                                <p style={{color: '#6a5b48'}}>No behavioral questions available</p>
                             )}
                         </div>
                     </div>
@@ -195,6 +197,7 @@ const Result = () => {
     return (
         <>
             <Navbar />
+            <DeveloperButton />
             <div className="result-page">
             <div className="result-container">
                 {/* Sidebar */}
@@ -262,7 +265,7 @@ const Result = () => {
                                 </div>
                             ))
                         ) : (
-                            <p style={{color: '#999'}}>No skill gaps identified</p>
+                            <p style={{color: '#6a5b48'}}>No skill gaps identified</p>
                         )}
                     </div>
                 </div>

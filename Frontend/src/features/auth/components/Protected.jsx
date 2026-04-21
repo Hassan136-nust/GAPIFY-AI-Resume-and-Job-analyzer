@@ -6,7 +6,7 @@ const Protected=({children})=>{
     const {loading , user}=useAuth();
     if(loading){
         return(
-            <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#1a1a1a'}}>
+            <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#D9CFBE'}}>
                 <Loader message="Authenticating..." />
             </div>
         )

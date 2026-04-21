@@ -5,16 +5,16 @@ main{
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: #1a1a1a;
+    background-color: #D9CFBE;
     padding: 1rem;
 
     .form-container{
         width: 100%;
         max-width: 420px;
-        background-color: #242424;
+        background-color: #E8DECF;
         padding: 2.5rem;
         border-radius: 0.75rem;
-        border: 1px solid #333;
+        border: 1px solid #B99972;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -24,7 +24,7 @@ main{
             padding-bottom: 1.5rem;
 
             h1{
-                color: #e0e0e0;
+                color: #342a1f;
                 font-size: 1.75rem;
                 font-weight: 700;
                 margin-bottom: 0.25rem;
@@ -32,7 +32,7 @@ main{
             }
 
             .tagline{
-                color: #999;
+                color: #6a5b48;
                 font-size: 0.85rem;
                 font-weight: 400;
                 margin: 0;
@@ -40,7 +40,7 @@ main{
         }
 
         .form-title{
-            color: #e0e0e0;
+            color: #342a1f;
             font-size: 1.25rem;
             font-weight: 600;
             text-align: center;
@@ -49,11 +49,11 @@ main{
 
         p{
             text-align: center;
-            color: #999;
+            color: #6a5b48;
             font-size: 0.9rem;
 
             a{
-                color: #d4376e;
+                color: #8C6642;
                 text-decoration: none;
                 font-weight: 500;
 
@@ -76,29 +76,29 @@ main{
         gap: 0.5rem;
 
         label{
-            color: #b0b0b0;
+            color: #5f513f;
             font-weight: 500;
             font-size: 0.9rem;
         }
 
         input{
-            border: 1px solid #333;
+            border: 1px solid #B99972;
             outline: none;
             padding-inline: 1rem;
             padding-block: 0.75rem;
             border-radius: 0.5rem;
             font-size: 1rem;
             transition: all 0.2s ease;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
+            background-color: #F0EAE0;
+            color: #342a1f;
 
             &:focus{
-                border-color: #d4376e;
-                background-color: #242424;
+                border-color: #8C6642;
+                background-color: #E8DECF;
             }
 
             &::placeholder{
-                color: #666;
+                color: #88755f;
             }
         }
     }

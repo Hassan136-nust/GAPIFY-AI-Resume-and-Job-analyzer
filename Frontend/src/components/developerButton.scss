@@ -1,0 +1,50 @@
+.developer-button {
+    position: fixed;
+    bottom: 2rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background-color: #342a1f;
+    color: #D9CFBE;
+    text-decoration: none;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(52, 42, 31, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 2px solid #342a1f;
+
+    svg {
+        font-size: 1.1rem;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(52, 42, 31, 0.4);
+        background-color: #D9CFBE;
+        color: #342a1f;
+        border-color: #342a1f;
+    }
+
+    &:active {
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+        bottom: 1rem;
+        left: 0.5rem;
+        padding: 0.625rem 1rem;
+        font-size: 0.85rem;
+
+        span {
+            display: none;
+        }
+
+        svg {
+            font-size: 1.25rem;
+        }
+    }
+}

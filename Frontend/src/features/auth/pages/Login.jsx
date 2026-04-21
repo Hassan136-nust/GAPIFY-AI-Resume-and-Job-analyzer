@@ -2,6 +2,7 @@ import { useState } from "react"
 import "../auth.form.scss"
 import {Link, useNavigate} from 'react-router'
 import {useAuth} from "../hooks/useAuth"
+import DeveloperButton from "../../../components/DeveloperButton"
 
 const Login =  ()=>{
     const {loading , handleLogin}= useAuth();
@@ -28,6 +29,7 @@ const Login =  ()=>{
     }
     return (
         <>
+            <DeveloperButton />
       <main>
         <div className="form-container">
             <div className="brand-header">

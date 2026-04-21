@@ -10,11 +10,11 @@
     transition: all 0.2s ease;
 
     &.primary-button{
-        background-color: #d4376e;
-        color: white;
+        background: linear-gradient(135deg, #8C6642 0%, #A47A4E 60%, #B99972 100%);
+        color: #faf8f4;
         
         &:hover{
-            background-color: #b82f5c;
+            background: linear-gradient(135deg, #6B5537 0%, #8C6642 60%, #A47A4E 100%);
         }
     }
 

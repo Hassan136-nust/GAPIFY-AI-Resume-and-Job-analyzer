@@ -2,6 +2,7 @@ import { useState } from "react"
 import "../auth.form.scss"
 import { Link, useNavigate} from "react-router";
 import {useAuth} from "../hooks/useAuth"
+import DeveloperButton from "../../../components/DeveloperButton"
 
 const Register =  ()=>{
     const {loading , handleRegister}= useAuth();

@@ -16,7 +16,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="navbar-container">
                 <div className="navbar-brand">
-                    <h2>ResumeAI</h2>
+                    <h2>Gapify AI</h2>
                 </div>
                 
                 <div className="navbar-user">

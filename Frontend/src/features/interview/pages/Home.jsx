@@ -6,6 +6,7 @@ import { useNavigate } from "react-router"
 import { InterviewContext } from "../interview.context"
 import Navbar from "../../../components/Navbar"
 import Loader from "../../../components/Loader"
+import DeveloperButton from "../../../components/DeveloperButton"
 import axios from "axios"
 import { API_ENDPOINTS } from "../../../config/api"
 
@@ -102,10 +103,11 @@ const Home = () => {
         return (
             <>
                 <Navbar />
+                <DeveloperButton />
                 <div className="interview-page">
                     <div className="interview-container">
                         <Loader message="Analyzing Your Profile..." />
-                        <p style={{textAlign: 'center', color: '#999', marginTop: '1rem'}}>
+                        <p style={{textAlign: 'center', color: '#6a5b48', marginTop: '1rem'}}>
                             Our AI is generating your personalized report. This may take a moment.
                         </p>
                     </div>
@@ -117,6 +119,7 @@ const Home = () => {
     return (
         <>
             <Navbar />
+            <DeveloperButton />
             <div className="interview-page">
                 <div className="interview-container">
                     <div className="page-header">
