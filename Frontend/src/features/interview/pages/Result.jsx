@@ -57,12 +57,15 @@ const Result = () => {
             );
 
             console.log("Response received, blob size:", response.data.size, "bytes");
+            const contentType = response.headers?.["content-type"] || "";
+            const isHtmlFallback = contentType.includes("text/html") || response.headers?.["x-resume-fallback"] === "html";
+            const fileName = isHtmlFallback ? "optimized-resume.html" : "optimized-resume.pdf";
             
             // Create download link
             const url = window.URL.createObjectURL(response.data);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'optimized-resume.pdf';
+            a.download = fileName;
             document.body.appendChild(a);
             a.click();
             
@@ -70,6 +73,9 @@ const Result = () => {
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
             
+            if (isHtmlFallback) {
+                alert("PDF engine is unavailable on server right now. Downloaded HTML resume instead.");
+            }
             console.log("Download completed successfully");
         } catch (err) {
             console.error("Download error:", err);

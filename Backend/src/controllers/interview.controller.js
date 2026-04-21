@@ -1,7 +1,56 @@
 const pdfParse = require("pdf-parse")
 const puppeteer = require("puppeteer")
+const fs = require("fs")
 const { generateInterviewReport, generateResumePdf } = require("../services/ai.services")
 const interviewReportModel = require("../models/interviewReport.model")
+
+function escapeHtml(value = "") {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function buildBasicResumeHtml(interviewReport) {
+    const safeTitle = escapeHtml(interviewReport.title || "Optimized Resume");
+    const safeSummary = escapeHtml(interviewReport.selfDescription || "No summary provided.");
+    const safeSkills = (interviewReport.skillGaps || [])
+        .map((item) => `<li>${escapeHtml(item.skill)} (${escapeHtml(item.severity)})</li>`)
+        .join("") || "<li>No skill insights available</li>";
+
+    return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>${safeTitle}</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:32px;line-height:1.5;color:#111}
+    h1,h2{margin:0 0 12px}
+    section{margin-top:20px}
+    ul{padding-left:20px}
+    .muted{color:#555}
+  </style>
+</head>
+<body>
+  <h1>${safeTitle}</h1>
+  <p class="muted">Generated fallback resume format</p>
+  <section>
+    <h2>Professional Summary</h2>
+    <p>${safeSummary}</p>
+  </section>
+  <section>
+    <h2>Job Target</h2>
+    <p>${escapeHtml(interviewReport.jobDescription || "Not provided")}</p>
+  </section>
+  <section>
+    <h2>Skills To Improve</h2>
+    <ul>${safeSkills}</ul>
+  </section>
+</body>
+</html>`;
+}
 async function generateInterviewReportController(req,res){
     try {
         const resumeFile = req.file;
@@ -65,6 +114,7 @@ async function getAllInterviewReportsController(req,res){
 
 async function generateResumePdfController(req, res) {
     let browser;
+    let htmlContent = "";
     try {
         const { interviewId } = req.params;
         console.log("=== Resume PDF Generation Started ===");
@@ -87,19 +137,24 @@ async function generateResumePdfController(req, res) {
         console.log("Interview report found, generating HTML...");
 
         // Generate HTML using AI
-        const htmlContent = await generateResumePdf(
-            interviewReport.resume,
-            interviewReport.selfDescription,
-            interviewReport.jobDescription
-        );
+        try {
+            htmlContent = await generateResumePdf(
+                interviewReport.resume,
+                interviewReport.selfDescription,
+                interviewReport.jobDescription
+            );
+        } catch (aiErr) {
+            console.error("AI HTML generation failed, using fallback HTML:", aiErr.message);
+            htmlContent = buildBasicResumeHtml(interviewReport);
+        }
 
         console.log("HTML generated, length:", htmlContent.length);
         console.log("Launching Puppeteer...");
 
-        // Launch Puppeteer and convert HTML to PDF
-        browser = await puppeteer.launch({
+        const configuredExecutablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+        const hasValidConfiguredPath = configuredExecutablePath && fs.existsSync(configuredExecutablePath);
+        const launchOptions = {
             headless: true,
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
             protocolTimeout: 120000,
             args: [
                 '--no-sandbox',
@@ -109,7 +164,27 @@ async function generateResumePdfController(req, res) {
                 '--single-process',
                 '--no-zygote'
             ]
-        });
+        };
+
+        if (hasValidConfiguredPath) {
+            launchOptions.executablePath = configuredExecutablePath;
+        } else if (configuredExecutablePath) {
+            console.warn(`Ignoring invalid PUPPETEER_EXECUTABLE_PATH: ${configuredExecutablePath}`);
+        }
+
+        // Launch Puppeteer and convert HTML to PDF
+        try {
+            browser = await puppeteer.launch(launchOptions);
+        } catch (launchErr) {
+            const canRetryWithoutPath = launchOptions.executablePath && /executablePath|Browser was not found/i.test(launchErr.message || "");
+            if (!canRetryWithoutPath) {
+                throw launchErr;
+            }
+
+            console.warn("Retrying Puppeteer launch without configured executablePath...");
+            delete launchOptions.executablePath;
+            browser = await puppeteer.launch(launchOptions);
+        }
 
         const page = await browser.newPage();
         page.setDefaultTimeout(120000);
@@ -149,11 +224,18 @@ async function generateResumePdfController(req, res) {
         console.error("=== Resume PDF Generation Error ===");
         console.error("Error:", err);
         console.error("Stack:", err.stack);
-        const isPuppeteerFailure = /browser|chromium|executable|sandbox|target closed/i.test(err.message || "");
+        const isPdfEngineFailure = /browser|chromium|executable|sandbox|target closed|protocol|timeout/i.test(err.message || "");
+
+        if (isPdfEngineFailure && htmlContent) {
+            console.log("Returning HTML fallback instead of 500");
+            res.setHeader("Content-Type", "text/html; charset=utf-8");
+            res.setHeader("Content-Disposition", 'attachment; filename="optimized-resume.html"');
+            res.setHeader("X-Resume-Fallback", "html");
+            return res.status(200).send(htmlContent);
+        }
+
         res.status(500).json({
-            message: isPuppeteerFailure
-                ? "PDF engine failed on server. Please retry in a minute."
-                : "Failed to generate resume PDF",
+            message: "Failed to generate resume PDF",
             error: err.message
         });
     } finally {
