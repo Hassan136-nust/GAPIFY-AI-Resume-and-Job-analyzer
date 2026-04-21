@@ -32,10 +32,11 @@
 
 1. **Create a new Project on Vercel**
    - Import your GitHub repository
-   - Framework Preset: Vite
-   - Root Directory: `Frontend`
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
+   - **Root Directory: Select `Frontend`** (Important!)
+   - Framework Preset: Vite (auto-detected)
+   - Build Command: `npm run build` (auto-detected)
+   - Output Directory: `dist` (auto-detected)
+   - Install Command: `npm install` (auto-detected)
 
 2. **Environment Variables** (Add in Vercel Dashboard)
    ```
@@ -46,6 +47,10 @@
    - Copy your Vercel frontend URL
    - Update FRONTEND_URL in Render backend environment variables
    - Redeploy backend to apply CORS changes
+
+**Alternative: If deploying from root directory**
+- Delete the `vercel.json` file from root
+- Or use the vercel.json configuration provided
 
 ---
 

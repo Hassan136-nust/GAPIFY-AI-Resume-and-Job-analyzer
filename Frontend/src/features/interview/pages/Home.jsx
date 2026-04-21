@@ -7,6 +7,7 @@ import { InterviewContext } from "../interview.context"
 import Navbar from "../../../components/Navbar"
 import Loader from "../../../components/Loader"
 import axios from "axios"
+import { API_ENDPOINTS } from "../../../config/api"
 
 const Home = () => {
     const [resume, setResume] = useState(null);
@@ -26,7 +27,7 @@ const Home = () => {
 
     const fetchPastReports = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/interview', {
+            const response = await axios.get(API_ENDPOINTS.INTERVIEW.GET_ALL, {
                 withCredentials: true
             });
             setPastReports(response.data.interviewReports || []);
@@ -76,7 +77,7 @@ const Home = () => {
 
     const handleViewReport = async (reportId) => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/interview/report/${reportId}`, {
+            const response = await axios.get(API_ENDPOINTS.INTERVIEW.GET_BY_ID(reportId), {
                 withCredentials: true
             });
             setReportData(response.data.interviewReport);

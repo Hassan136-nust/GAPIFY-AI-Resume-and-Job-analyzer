@@ -5,6 +5,7 @@ import { FiCheckCircle, FiAlertCircle, FiMap, FiChevronDown, FiChevronUp, FiDown
 import { InterviewContext } from "../interview.context"
 import { useNavigate } from "react-router"
 import Navbar from "../../../components/Navbar"
+import { API_ENDPOINTS } from "../../../config/api"
 
 const Result = () => {
     const [activeSection, setActiveSection] = useState("technical");
@@ -48,7 +49,7 @@ const Result = () => {
             console.log("Downloading resume for interview ID:", interviewId);
             
             const response = await axios.get(
-                `http://localhost:3000/api/interview/resume/${interviewId}`,
+                API_ENDPOINTS.INTERVIEW.DOWNLOAD_RESUME(interviewId),
                 {
                     withCredentials: true,
                     responseType: 'blob' // Important for binary data

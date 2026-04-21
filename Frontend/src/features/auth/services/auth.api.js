@@ -1,8 +1,9 @@
 import axios from "axios"
+import { API_ENDPOINTS } from "../../../config/api"
 
 export async function register({username, email ,password}) {   
     try{     
-  const response = await axios.post('http://localhost:3000/api/auth/register',{
+  const response = await axios.post(API_ENDPOINTS.AUTH.REGISTER,{
     username,email,password
   },{
     withCredentials:true
@@ -17,7 +18,7 @@ export async function register({username, email ,password}) {
 
 export async function login({ email ,password}) {   
     try{     
-  const response = await axios.post('http://localhost:3000/api/auth/login',{
+  const response = await axios.post(API_ENDPOINTS.AUTH.LOGIN,{
     email,password
   },{
     withCredentials:true
@@ -32,7 +33,7 @@ export async function login({ email ,password}) {
 
 export async function logout() {
     try{
- const response = await axios.get('http://localhost:3000/api/auth/logout',{
+ const response = await axios.get(API_ENDPOINTS.AUTH.LOGOUT,{
     withCredentials:true
   })
   return response;
@@ -46,7 +47,7 @@ export async function logout() {
 
 export async function getme() {
     try{
- const response = await axios.get('http://localhost:3000/api/auth/getme',{
+ const response = await axios.get(API_ENDPOINTS.AUTH.GET_ME,{
     withCredentials:true
   })
   return response.data;
