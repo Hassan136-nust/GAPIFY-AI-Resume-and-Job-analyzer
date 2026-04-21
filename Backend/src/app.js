@@ -3,6 +3,12 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const app = express();
+app.set("trust proxy", 1);
+
+const frontendUrlsFromEnv = (process.env.FRONTEND_URL || "")
+    .split(",")
+    .map((url) => url.trim())
+    .filter(Boolean);
 
 // CORS configuration (removed the problematic app.options line)
 app.use(cors({
@@ -19,8 +25,8 @@ app.use(cors({
             return callback(null, true);
         }
         
-        // Allow specific frontend URL from environment
-        if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) {
+        // Allow explicit frontend URLs from environment (comma separated)
+        if (frontendUrlsFromEnv.includes(origin)) {
             return callback(null, true);
         }
         
