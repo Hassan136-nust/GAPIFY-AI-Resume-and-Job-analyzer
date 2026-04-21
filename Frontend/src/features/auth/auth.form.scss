@@ -1,0 +1,182 @@
+
+main{
+    min-height: 100vh;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 1rem;
+
+    .form-container{
+        width: 100%;
+        max-width: 420px;
+        background-color: #242424;
+        padding: 2.5rem;
+        border-radius: 0.75rem;
+        border: 1px solid #333;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .brand-header{
+            text-align: center;
+            padding-bottom: 1.5rem;
+
+            h1{
+                color: #e0e0e0;
+                font-size: 1.75rem;
+                font-weight: 700;
+                margin-bottom: 0.25rem;
+                letter-spacing: -0.5px;
+            }
+
+            .tagline{
+                color: #999;
+                font-size: 0.85rem;
+                font-weight: 400;
+                margin: 0;
+            }
+        }
+
+        .form-title{
+            color: #e0e0e0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 0;
+        }
+
+        p{
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+
+            a{
+                color: #d4376e;
+                text-decoration: none;
+                font-weight: 500;
+
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .input-group{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label{
+            color: #b0b0b0;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input{
+            border: 1px solid #333;
+            outline: none;
+            padding-inline: 1rem;
+            padding-block: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+
+            &:focus{
+                border-color: #d4376e;
+                background-color: #242424;
+            }
+
+            &::placeholder{
+                color: #666;
+            }
+        }
+    }
+
+    button{
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        padding: 1.5rem;
+        
+        .form-container{
+            padding: 2rem 1.5rem;
+            
+            .brand-header h1{
+                font-size: 1.5rem;
+            }
+            
+            .form-title{
+                font-size: 1.15rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 1rem;
+        
+        .form-container{
+            padding: 1.75rem 1.25rem;
+            gap: 1.25rem;
+            
+            .brand-header{
+                padding-bottom: 1rem;
+                
+                h1{
+                    font-size: 1.4rem;
+                }
+                
+                .tagline{
+                    font-size: 0.8rem;
+                }
+            }
+            
+            .form-title{
+                font-size: 1.1rem;
+            }
+        }
+        
+        form{
+            gap: 1rem;
+        }
+        
+        .input-group{
+            label{
+                font-size: 0.85rem;
+            }
+            
+            input{
+                padding-inline: 0.875rem;
+                padding-block: 0.65rem;
+                font-size: 0.95rem;
+            }
+        }
+        
+        button{
+            padding-inline: 1.25rem;
+            padding-block: 0.65rem;
+            font-size: 0.95rem;
+        }
+        
+        p{
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .form-container{
+            padding: 1.5rem 1rem;
+        }
+    }
+}

@@ -1,0 +1,97 @@
+.navbar {
+    background-color: #242424;
+    border-bottom: 1px solid #333;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    .navbar-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        h2 {
+            color: #d4376e;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    .navbar-user {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #1a1a1a;
+            border-radius: 0.5rem;
+            border: 1px solid #333;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+
+            svg {
+                font-size: 1.1rem;
+                color: #d4376e;
+            }
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #d4376e 0%, #b82f5c 100%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+
+            svg {
+                font-size: 1.1rem;
+            }
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(212, 55, 110, 0.4);
+            }
+        }
+    }
+
+    @media (max-width: 640px) {
+        .navbar-container {
+            padding: 1rem;
+        }
+
+        .navbar-brand h2 {
+            font-size: 1.25rem;
+        }
+
+        .navbar-user {
+            gap: 0.5rem;
+
+            .user-info span {
+                display: none;
+            }
+
+            .logout-btn span {
+                display: none;
+            }
+        }
+    }
+}
