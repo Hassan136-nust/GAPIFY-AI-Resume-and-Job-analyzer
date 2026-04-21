@@ -1,4 +1,4 @@
-# ResumeAI - AI-Powered Resume & Interview Analyzer
+# Gapify AI - AI-Powered Resume & Interview Analyzer
 
 A full-stack application that uses AI to analyze resumes, generate interview questions, identify skill gaps, and create optimized resumes tailored to job descriptions.
 

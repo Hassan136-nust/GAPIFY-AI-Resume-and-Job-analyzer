@@ -6,19 +6,27 @@
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.2s ease;
 
     &.primary-button{
-        background: linear-gradient(135deg, #8C6642 0%, #A47A4E 60%, #B99972 100%);
-        color: #faf8f4;
+        background-color: #7D2638;
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(125, 38, 56, 0.2);
         
         &:hover{
-            background: linear-gradient(135deg, #6B5537 0%, #8C6642 60%, #A47A4E 100%);
+            background-color: #5d1c29;
+            box-shadow: 0 4px 12px rgba(125, 38, 56, 0.3);
+            transform: translateY(-2px);
         }
     }
 
     &:active{
-        transform: scale(0.98);
+        transform: translateY(0) scale(0.98);
+    }
+
+    &:disabled{
+        opacity: 0.6;
+        cursor: not-allowed;
     }
 }

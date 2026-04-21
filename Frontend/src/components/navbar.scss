@@ -1,11 +1,11 @@
 .navbar {
-    background-color: #E8DECF;
-    border-bottom: 1px solid #B99972;
+    background-color: #FFFBF5;
+    border-bottom: 1px solid #E8D4C0;
     padding: 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(125, 38, 56, 0.08);
 
     .navbar-container {
         max-width: 1400px;
@@ -18,7 +18,7 @@
 
     .navbar-brand {
         h2 {
-            color: #8C6642;
+            color: #7D2638;
             font-size: 1.5rem;
             font-weight: 700;
             margin: 0;
@@ -36,15 +36,15 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background-color: #F0EAE0;
+            background-color: #FFF8F0;
             border-radius: 0.5rem;
-            border: 1px solid #B99972;
-            color: #342a1f;
+            border: 1px solid #E8D4C0;
+            color: #2D1B1B;
             font-size: 0.95rem;
 
             svg {
                 font-size: 1.1rem;
-                color: #8C6642;
+                color: #7D2638;
             }
         }
 
@@ -53,8 +53,8 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, #8C6642 0%, #A47A4E 60%, #B99972 100%);
-            color: #faf8f4;
+            background-color: #7D2638;
+            color: #ffffff;
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
@@ -67,8 +67,9 @@
             }
 
             &:hover {
+                background-color: #5d1c29;
                 transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(140, 102, 66, 0.35);
+                box-shadow: 0 4px 12px rgba(125, 38, 56, 0.3);
             }
         }
     }

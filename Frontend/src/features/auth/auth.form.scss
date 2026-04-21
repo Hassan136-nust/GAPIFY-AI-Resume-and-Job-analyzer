@@ -5,26 +5,27 @@ main{
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: #D9CFBE;
+    background-color: #FFF8F0;
     padding: 1rem;
 
     .form-container{
         width: 100%;
         max-width: 420px;
-        background-color: #E8DECF;
+        background-color: #FFFBF5;
         padding: 2.5rem;
         border-radius: 0.75rem;
-        border: 1px solid #B99972;
+        border: 1px solid #E8D4C0;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+        box-shadow: 0 2px 8px rgba(125, 38, 56, 0.08);
 
         .brand-header{
             text-align: center;
             padding-bottom: 1.5rem;
 
             h1{
-                color: #342a1f;
+                color: #2D1B1B;
                 font-size: 1.75rem;
                 font-weight: 700;
                 margin-bottom: 0.25rem;
@@ -32,7 +33,7 @@ main{
             }
 
             .tagline{
-                color: #6a5b48;
+                color: #5C4033;
                 font-size: 0.85rem;
                 font-weight: 400;
                 margin: 0;
@@ -40,7 +41,7 @@ main{
         }
 
         .form-title{
-            color: #342a1f;
+            color: #2D1B1B;
             font-size: 1.25rem;
             font-weight: 600;
             text-align: center;
@@ -49,16 +50,17 @@ main{
 
         p{
             text-align: center;
-            color: #6a5b48;
+            color: #5C4033;
             font-size: 0.9rem;
 
             a{
-                color: #8C6642;
+                color: #7D2638;
                 text-decoration: none;
                 font-weight: 500;
 
                 &:hover{
                     text-decoration: underline;
+                    color: #5d1c29;
                 }
             }
         }
@@ -76,29 +78,29 @@ main{
         gap: 0.5rem;
 
         label{
-            color: #5f513f;
+            color: #2D1B1B;
             font-weight: 500;
             font-size: 0.9rem;
         }
 
         input{
-            border: 1px solid #B99972;
+            border: 1px solid #E8D4C0;
             outline: none;
             padding-inline: 1rem;
             padding-block: 0.75rem;
             border-radius: 0.5rem;
             font-size: 1rem;
             transition: all 0.2s ease;
-            background-color: #F0EAE0;
-            color: #342a1f;
+            background-color: #FFF8F0;
+            color: #2D1B1B;
 
             &:focus{
-                border-color: #8C6642;
-                background-color: #E8DECF;
+                border-color: #7D2638;
+                box-shadow: 0 0 0 3px rgba(125, 38, 56, 0.1);
             }
 
             &::placeholder{
-                color: #88755f;
+                color: #A89080;
             }
         }
     }

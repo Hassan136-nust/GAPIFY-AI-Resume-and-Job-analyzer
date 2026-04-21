@@ -10,7 +10,7 @@ const DeveloperButton = () => {
             className="developer-button"
         >
             <FiUser />
-            <span>About Developer</span>
+            <span></span>
         </a>
     );
 };
